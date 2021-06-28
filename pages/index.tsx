@@ -1,9 +1,19 @@
-import Link from "next/link";
-
+import { getSortedPostsData } from "../lib/posts";
 import Head from "next/head";
 import { Layout } from "../components/Layout";
+import { PostData } from "../lib/posts";
+import React from "react";
 
-export default function Home() {
+export const getStaticProps = async () => {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+};
+
+const Home = ({ allPostsData }) => {
   return (
     <Layout home>
       <Head>
@@ -20,6 +30,22 @@ export default function Home() {
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
       </section>
+      <section>
+        <h2>Blog</h2>
+        <ul>
+          {allPostsData.map(({ id, date, title }) => (
+            <li key={id}>
+              {title}
+              <br />
+              {id}
+              <br />
+              {date}
+            </li>
+          ))}
+        </ul>
+      </section>
     </Layout>
   );
-}
+};
+
+export default Home;
