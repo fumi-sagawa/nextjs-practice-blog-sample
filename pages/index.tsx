@@ -1,10 +1,10 @@
-import { getSortedPostsData } from "../lib/posts";
-import Head from "next/head";
-import { Layout } from "../components/Layout";
-import { PostData } from "../lib/posts";
 import React from "react";
+import Head from "next/head";
 import Link from "next/link";
+import { getSortedPostsData } from "../lib/posts";
+import { Layout } from "../components/Layout";
 import { Date } from "../components/date";
+import { css } from "@emotion/react";
 
 export const getStaticProps = async () => {
   const allPostsData = getSortedPostsData();
@@ -34,7 +34,7 @@ const Home = ({ allPostsData }) => {
       </section>
       <section>
         <h2>Blog</h2>
-        <ul>
+        <ul css={blogList}>
           {allPostsData.map(({ id, date, title }) => (
             <li key={id}>
               <Link href={`/posts/${id}`}>
@@ -51,5 +51,19 @@ const Home = ({ allPostsData }) => {
     </Layout>
   );
 };
+
+const blogList = css`
+  padding: 0;
+  display: grid;
+  row-gap: 20px;
+  li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  time {
+    color: #999;
+  }
+`;
 
 export default Home;
