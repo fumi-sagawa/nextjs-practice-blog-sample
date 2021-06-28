@@ -12,11 +12,11 @@ type Props = {
 const name = "Fumiya Sagawa";
 export const siteTitle = "Next.js Sample Website";
 
-export const Layout: React.VFC<Props> = ({ children, home = false }) => {
+export const Layout: React.VFC<Props> = ({ children, home }) => {
   return (
     <div css={container}>
       <Heading siteTitle={siteTitle} />
-      <Header name={name} />
+      <Header name={name} home={home} />
       <main>{children}</main>
       {!home && (
         <div css={backToHome}>

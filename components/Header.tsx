@@ -7,7 +7,7 @@ type Props = {
   home?: boolean;
 };
 
-export const Header: React.VFC<Props> = ({ home = true, name }) => {
+export const Header: React.VFC<Props> = ({ home = false, name }) => {
   return (
     <header css={header}>
       {home ? (
@@ -19,10 +19,12 @@ export const Header: React.VFC<Props> = ({ home = true, name }) => {
         <>
           <Link href="/">
             <img src="/images/profile.jpg" css={headerImage} alt={name} />
-            <h2>
-              <Link href="/">{name}</Link>
-            </h2>
-          </Link>
+          </Link>{" "}
+          <h2>
+            <Link href="/">
+              <a css={colorInherit}>{name}</a>
+            </Link>
+          </h2>
         </>
       )}
     </header>
@@ -47,13 +49,22 @@ const header = css`
   }
 `;
 
+const borderCircle = css`
+  border-radius: 9999px;
+`;
+
 const headerImage = css`
   width: 6rem;
   height: 6rem;
+  ${borderCircle}
 `;
 
 const headerHomeImage = css`
   width: 8rem;
   height: 8rem;
-  border-radius: 9999px;
+  ${borderCircle}
+`;
+
+const colorInherit = css`
+  color: inherit;
 `;
