@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { css } from "@emotion/react";
 
 type Props = {
@@ -12,13 +13,27 @@ export const Header: React.VFC<Props> = ({ home = false, name }) => {
     <header css={header}>
       {home ? (
         <>
-          <img src="/images/profile.jpg" css={headerHomeImage} alt={name} />
+          <div css={homeImageContainer}>
+            <Image
+              src="/images/profile.jpg"
+              alt={name}
+              layout="fill"
+              objectFit="contain"
+            />
+          </div>
           <h1>{name}</h1>
         </>
       ) : (
         <>
           <Link href="/">
-            <img src="/images/profile.jpg" css={headerImage} alt={name} />
+            <div css={imageContainer}>
+              <Image
+                src="/images/profile.jpg"
+                alt={name}
+                layout="fill"
+                objectFit="contain"
+              />
+            </div>
           </Link>{" "}
           <h2>
             <Link href="/">
@@ -53,16 +68,22 @@ const borderCircle = css`
   border-radius: 9999px;
 `;
 
-const headerImage = css`
-  width: 6rem;
-  height: 6rem;
-  ${borderCircle}
-`;
-
-const headerHomeImage = css`
+const homeImageContainer = css`
+  position: relative;
   width: 8rem;
   height: 8rem;
-  ${borderCircle}
+  div {
+    border-radius: 9999px;
+  }
+`;
+
+const imageContainer = css`
+  position: relative;
+  width: 6rem;
+  height: 6rem;
+  div {
+    border-radius: 9999px;
+  }
 `;
 
 const colorInherit = css`
